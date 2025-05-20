@@ -2,6 +2,12 @@ export function cardDelete(placesItem) {
   placesItem.remove();
 }
 
+// Обработчик лайка
+export function handleLike(likeButton) {
+  likeButton.classList.toggle('card__like-button_is-active');
+}
+
+
 // Функция создания карточки
 export function createCard(cardData, { cardDelete, handleLike, ImageClick }) {
   const cardTemplate = document.querySelector('#card-template').content;

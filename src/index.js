@@ -1,6 +1,6 @@
 import './index.css';
 import { initialCards } from './scripts/cards.js';
-import { createCard, cardDelete } from './scripts/card.js';
+import { createCard, cardDelete, handleLike} from './scripts/card.js';
 import { openModal, closeModal } from './scripts/modal.js';
 
 // профиль
@@ -21,9 +21,9 @@ const cardNameInput = addCardForm.querySelector('.popup__input_type_card-name');
 const cardLinkInput = addCardForm.querySelector('.popup__input_type_url');
 
 // форма редактирования профиля
-const formElement = popupEdit.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_description');
+const profileFormElement = popupEdit.querySelector('.popup__form');
+const nameInput = profileFormElement.querySelector('.popup__input_type_name');
+const jobInput = profileFormElement.querySelector('.popup__input_type_description');
 
 // просмотр изображения
 const popupImage = popupTypeImage.querySelector('.popup__image');
@@ -40,10 +40,7 @@ const ImageClick = (cardData) => {
   openModal(popupTypeImage);
 };
 
-// Обработчик лайка
-const handleLike = (likeButton) => {
-  likeButton.classList.toggle('card__like-button_is-active');
-};
+
 
 // Создание карточки
 function renderCard(cardData) {
@@ -66,14 +63,14 @@ profileEditBtn.addEventListener('click', () => {
 });
 
 // Обработка отправки формы редактирования профиля
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closeModal(popupEdit);
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
 // Открытие попапа добавления карточки
 addCardBtn.addEventListener('click', () => openModal(popupNewCard));
