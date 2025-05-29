@@ -8,6 +8,8 @@
 @import url('./__caption/popup__caption.css');
 @import url('./__image/popup__image.css');
 
+
+
 .popup {
   font-family: 'Inter', Arial, sans-serif;
   display: none;
@@ -20,4 +22,13 @@
   bottom: 0;
   right: 0;
   z-index: 10;
+}
+
+.form__input_type_error {
+    border: none;
+    border-bottom: 1px solid var(--error_color);
+}
+
+.form__input-error {
+    color: var(--error_color);
 }
