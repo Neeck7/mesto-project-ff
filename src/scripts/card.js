@@ -1,4 +1,3 @@
-import { likeCardApi, dislikeCardApi } from "./api.js";
 const cardTemplate = document.querySelector("#card-template").content;
 function createCard(cardData, clickDelete, clickImg, clickLike, userId) {
   const placesItem = cardTemplate.querySelector(".places__item").cloneNode(true);
@@ -41,11 +40,27 @@ function createCard(cardData, clickDelete, clickImg, clickLike, userId) {
 }
 
 // меняет состояние кнопки лайка
-function downLike(cardLike) {
-  const targetClass = "card__like-button_is-active";
-  cardLike.classList.toggle(targetClass);
-  // Возвращает true если кнопка активна, иначе false
-  return cardLike.classList.contains("card__like-button_is-active");
+// function downLike(cardLike) {
+//   const targetClass = "card__like-button_is-active";
+//   cardLike.classList.toggle(targetClass);
+//   // Возвращает true если кнопка активна, иначе false
+//   return cardLike.classList.contains("card__like-button_is-active");
+// }
+
+
+// Проверяет, был ли лайк на карточке
+export function isLiked(cardLikeButton) {
+  return cardLikeButton.classList.contains("card__like-button_is-active");
+}
+
+// Ставит лайк 
+function activateLike(cardLikeButton) {
+  cardLikeButton.classList.add("card__like-button_is-active");
+}
+
+// Убирает лайк 
+function deactivateLike(cardLikeButton) {
+  cardLikeButton.classList.remove("card__like-button_is-active");
 }
 
 // меняет счетчик лайков
@@ -58,4 +73,4 @@ function deleteCardFunc(cardElement) {
   cardElement.remove();
 }
 
-export { createCard, deleteCardFunc, downLike, setLikeCounter };
+export { createCard, deleteCardFunc,  setLikeCounter, activateLike, deactivateLike};

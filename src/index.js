@@ -2,8 +2,10 @@ import "./pages/index.css";
 import {
   createCard,
   deleteCardFunc,
-  downLike,
   setLikeCounter,
+  isLiked,
+  activateLike,
+  deactivateLike,
 } from "./scripts/card.js";
 import { openModal, closeModal } from "./scripts/modal.js";
 import {
@@ -237,16 +239,20 @@ function handleDeleteCard(cardElement, cardId) {
 
 // Обработка нажатия кнопки Like
 function handleLikeCard(cardId, cardLikeButton, cardLikeCount) {
-  const handleLike = downLike(cardLikeButton);
+  const handleLike = isLiked(cardLikeButton);
 
-  const res_promise = handleLike ? likeCardApi(cardId) : dislikeCardApi(cardId);
+  const res_promise = handleLike ? dislikeCardApi(cardId) : likeCardApi(cardId);
   res_promise
     .then((res) => {
+      if (handleLike) {
+        deactivateLike(cardLikeButton);
+      } else {
+        activateLike(cardLikeButton);
+      }
       setLikeCounter(cardLikeCount, res.likes.length);
     })
     .catch((err) => {
-      console.log("Ошибка. Запрос не выполнен", err);
-      downLike(cardLikeButton);
+      console.error("Ошибка при изменении лайка:", err);
     });
 }
 
